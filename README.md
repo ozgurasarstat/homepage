@@ -1,1 +1,1 @@
-# Özgür Asar's homepage
+# Ozgur Asar's homepage

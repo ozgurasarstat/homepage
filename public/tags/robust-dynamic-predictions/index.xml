@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects on Özgür Asar, PhD</title>
-    <link>/project/</link>
-    <description>Recent content in Projects on Özgür Asar, PhD</description>
+    <title>Robust Dynamic Predictions on Özgür Asar, PhD</title>
+    <link>/tags/robust-dynamic-predictions/</link>
+    <description>Recent content in Robust Dynamic Predictions on Özgür Asar, PhD</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
     
-	    <atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+	    <atom:link href="/tags/robust-dynamic-predictions/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Non-Gaussian Modelling</title>
-      <link>/project/non-gaussian-modelling/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/project/non-gaussian-modelling/</guid>
-      <description>&lt;p&gt;We consider the analysis of continuous repeated measurement outcomes that are collected through time, also known as longitudinal data. A standard framework for analysing data of this kind is a linear Gaussian mixed-effects model within which the outcome variable can be decomposed into fixed-effects, time-invariant and time-varying random-effects, and measurement noise. We develop methodology that, for the first time, allows any combination of these stochastic components to be non-Gaussian, using multivariate Normal variance-mean mixtures. We estimate parameters by max- imum likelihood, implemented with a novel, computationally efficient stochastic gradient algorithm. We obtain standard error estimates by inverting the observed Fisher-information matrix, and obtain the predictive distributions for the random-effects in both filtering (conditioning on past and current data) and smoothing (conditioning on all data) contexts. To implement these procedures, we intro- duce an R package, ngme. We re-analyse two data-sets, from cystic fibrosis and nephrology research, that were previously analysed using Gaussian linear mixed effects models.&lt;/p&gt;
-</description>
-    </item>
     
     <item>
       <title>Robust Dynamic Predictions</title>
