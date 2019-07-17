@@ -1,14 +1,7 @@
 ---
-abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed
-  ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis
-  sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida
-  egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id
-  dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.
-  Vestibulum sit amet erat at nulla eleifend gravida.
+abstract: We use data from an ongoing cohort study of chronic kidney patients at Salford Royal NHS Foundation Trust, Greater Manchester, United Kingdom, to investigate the influence of acute kidney injury (AKI) on the subsequent rate of change of kidney function amongst patients already diagnosed with chronic kidney disease (CKD). We use a linear mixed effects modelling framework to enable estimation of both acute and chronic effects of AKI events on kidney function. We model the fixed effects by a piece-wise linear function with three change-points to capture the acute changes in kidney function that characterise an AKI event, and the random effects by the sum of three components - a random intercept, a stationary stochastic process with Matern correlation structure, and measurement error. We consider both multivariate Normal and multivariate t versions of the random effects. For either specification, we estimate model parameters by maximum likelihood and evaluate the plug-in predictive distributions of the random effects given the data. We find that following an AKI event the average long-term rate of decline in kidney function is almost doubled, regardless of the severity of the event. We also identify and present examples of individual patients whose kidney function trajectories diverge substantially from the population-average.
 authors:
 - admin
-- Robert Ford
 date: "2015-09-01T00:00:00Z"
 doi: ""
 featured: false
@@ -17,20 +10,19 @@ image:
   focal_point: ""
   preview_only: false
 projects: []
-publication: '*Journal of Source Themes, 1*(1)'
+publication: '*Biometrical Journal, 1*(1)'
 publication_short: ""
 publication_types:
 - "2"
 publishDate: "2017-01-01T00:00:00Z"
 slides: example
-summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
+summary: We model long eGFR series to inspect likely impacts of AKI occurrences.
 tags:
 - Source Themes
-title: An example journal article
+title: Short-term and long-term effects of acute kidney injury in chronic kidney disease patients - A longitudinal analysis
 url_code: ""
 url_dataset: ""
-url_pdf: http://arxiv.org/pdf/1512.04133v1
+url_pdf: https://onlinelibrary.wiley.com/doi/abs/10.1002/bimj.201500270
 url_poster: ""
 url_project: ""
 url_slides: ""
