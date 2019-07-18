@@ -13,7 +13,7 @@ education:
   - course: BSc in Statistics
     institution: Middle East Technical University, Turkey
     year: 2009
-email: ""
+email: "ozgurasarstat@gmail.com"
 interests:
 - Bayesian statistical and learning theory, methods, applications and software
 - Informatics
