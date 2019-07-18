@@ -30,8 +30,8 @@ subtitle = ""
     tag = "Non-Gaussian Modelling"
   
   [[content.filter_button]]
-    name = "Robust Dynamic Predictions"
-    tag = "Robust Dynamic Predictions"
+    name = "Real-time monitoring"
+    tag = "Real-time montitoring"
 
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.

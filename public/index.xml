@@ -108,6 +108,38 @@
     </item>
     
     <item>
+      <title>Dynamic predictions of kidney graft survival in the presence of longitudinal outliers</title>
+      <link>/publication/predict-graft-failure/</link>
+      <pubDate>Thu, 18 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/predict-graft-failure/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linear Mixed-Effects Models for Non-Gaussian Repeated Measurement Data</title>
+      <link>/publication/non-gaussian-lda/</link>
+      <pubDate>Thu, 18 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/non-gaussian-lda/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Robust Joint Models</title>
       <link>/post/2015-07-23-r-rmarkdown/</link>
       <pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate>
@@ -130,10 +162,10 @@
     
     <item>
       <title>Bayesian Modelling of Turkish SILC data</title>
-      <link>/publication/preprint/</link>
+      <link>/publication/silc/</link>
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/publication/preprint/</guid>
+      <guid>/publication/silc/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
@@ -342,26 +374,64 @@ $$&lt;/p&gt;
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/project/non-gaussian-modelling/</guid>
-      <description>&lt;p&gt;We consider the analysis of continuous repeated measurement outcomes that are collected through time, also known as longitudinal data. A standard framework for analysing data of this kind is a linear Gaussian mixed-effects model within which the outcome variable can be decomposed into fixed-effects, time-invariant and time-varying random-effects, and measurement noise. We develop methodology that, for the first time, allows any combination of these stochastic components to be non-Gaussian, using multivariate Normal variance-mean mixtures. We estimate parameters by max- imum likelihood, implemented with a novel, computationally efficient stochastic gradient algorithm. We obtain standard error estimates by inverting the observed Fisher-information matrix, and obtain the predictive distributions for the random-effects in both filtering (conditioning on past and current data) and smoothing (conditioning on all data) contexts. To implement these procedures, we intro- duce an R package, ngme. We re-analyse two data-sets, from cystic fibrosis and nephrology research, that were previously analysed using Gaussian linear mixed effects models.&lt;/p&gt;
+      <description>
+
+&lt;p&gt;This project consists of a number of methodological works of linear mixed-effects models and joint modelling of longitudinal and time-to-event outcomes.&lt;/p&gt;
+
+&lt;h1 id=&#34;linear-mixed-effects-models&#34;&gt;Linear-Mixed Effects Models&lt;/h1&gt;
+
+&lt;p&gt;In &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/abs/10.1002/bimj.201500270&#34; target=&#34;_blank&#34;&gt;Asar et al. (2016)&lt;/a&gt; we consider a linear mixed-effects model that assumes observed outcomes are underlying signal plus additive noise. Underlying signal is de-composed as fixed-effects, time-invariant
+random-effects, a stochastic process. We assume a multivariate t distribution for the repeated outcomes of a specific subject. The R package &lt;a href=&#34;https://cran.r-project.org/web/packages/lmenssp/index.html&#34; target=&#34;_blank&#34;&gt;lmenssp&lt;/a&gt; implements the methods. The methodology improves on the widely used multivariate Gaussian model, yet it has some drawbacks due to formulating the t distribution with a single mixing variable for a specific subject.&lt;/p&gt;
+
+&lt;p&gt;In &lt;a href=&#34;https://arxiv.org/abs/1804.02592&#34; target=&#34;_blank&#34;&gt;Asar et al.(2019a)&lt;/a&gt; we de-coupled the mixing varible and proposed a computationally efficient algorithm for maximum likelihood inference especially to analyse tall data-sets, i.e. data-sets with many rows. De-coupling allows us dropping the dependence between the random terms of the model. The R package &lt;a href=&#34;https://bitbucket.org/davidbolin/ngme/src/default/&#34; target=&#34;_blank&#34;&gt;ngme&lt;/a&gt; implements the proposed methods.&lt;/p&gt;
+
+&lt;h1 id=&#34;joint-modelling-of-longitudinal-and-time-to-event-outcomes&#34;&gt;Joint Modelling of Longitudinal and Time-to-Event Outcomes&lt;/h1&gt;
+
+&lt;p&gt;In &lt;a href=&#34;https://arxiv.org/abs/1905.00816&#34; target=&#34;_blank&#34;&gt;Asar et al.(2019b)&lt;/a&gt; we considered joint modelling of longitudinal and survival outcomes with t distributed random-effects and error terms.
+Random-effects and error terms were assumed to be independent and error terms were assumed to be serially indpendent. To the best of our knowledge this is the first work that proposed such a flexible joint model. The R package &lt;a href=&#34;https://github.com/ozgurasarstat/robjm&#34; target=&#34;_blank&#34;&gt;robjm&lt;/a&gt; implements the methods for modelling and dynamic predictions.&lt;/p&gt;
+
+&lt;p&gt;In [Asar et al.(2019c)]() we further extend the model of &lt;a href=&#34;https://arxiv.org/abs/1905.00816&#34; target=&#34;_blank&#34;&gt;Asar et al.(2019b)&lt;/a&gt; by allowing the degrees-of-freedom and scale parameters of the t distribution for the error term being time-varying.
+This is a likely scenario where data have different frequencies of outliers through time.
+Related methods are also implemented in the R package &lt;a href=&#34;https://github.com/ozgurasarstat/robjm&#34; target=&#34;_blank&#34;&gt;robjm&lt;/a&gt;.
+This work is nearly finished and will be available from arXiv soon!&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>Robust Dynamic Predictions</title>
-      <link>/project/dynamic-predictions/</link>
+      <title>Real-time monitoring</title>
+      <link>/project/real-time-monitoring/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>/project/dynamic-predictions/</guid>
-      <description>&lt;p&gt;Dynamic predictions of survival outcomes are of great interest to physicians and patients, since such predictions are useful elements of clinical decision-making. Joint modelling of longitudinal and survival data has been increasingly used to obtain dynamic predictions. A common assumption of joint modelling is that random-effects and error terms in the longitudinal sub-model are Gaussian. However, this assumption may be too restrictive, e.g. in the presence of outliers as commonly encountered in many real-life applications. A natural extension is to robustify the joint models by assuming more flexible distributions than Gaussian for the random-effects and/or error terms. Previous research reported improved performance of robust joint models compared to the Gaussian version in terms of parameter estimation, but dynamic prediction accuracy obtained from such approach has not been yet evaluated. In this study, we define a general robust joint model with t-distributed random-effects and error terms under a Bayesian paradigm. Dynamic predictions of graft failure were obtained for kidney transplant recipients from the French transplant cohort, DIVAT. Calibration and discrimination performances of Gaussian and robust joint models were compared for a validation sample. Dynamic predictions for two individuals are presented.&lt;/p&gt;
+      <guid>/project/real-time-monitoring/</guid>
+      <description>
+
+&lt;p&gt;This project contains a number of works mainly applied to kidney failure.&lt;/p&gt;
+
+&lt;h1 id=&#34;incipient-renal-failure&#34;&gt;Incipient Renal Failure&lt;/h1&gt;
+
+&lt;p&gt;In &lt;a href=&#34;https://academic.oup.com/biostatistics/article/16/3/522/269574&#34; target=&#34;_blank&#34;&gt;Diggle, Sousa and Asar (2015)&lt;/a&gt; we considered
+modelling 392,870 estimated glomerular filtration
+rate (eGFR) observations from 22,910 patients living in the city of Salford in Greater
+Manchester. The model is a linear mixed-effects model with a Gaussian process term for long series of repeated measurement data. The aim is to identify high risk primary care patient in order for timely referral to secondary care. We base our methods on a clinical guideline
+that says a primary care patient should be referred to secondary care if s/he loses
+kidney functon at least at a rate of 5% per year.&lt;/p&gt;
+
+&lt;h1 id=&#34;predicting-kidney-graft-survival&#34;&gt;Predicting Kidney Graft Survival&lt;/h1&gt;
+
+&lt;p&gt;In &lt;a href=&#34;https://arxiv.org/abs/1905.00816&#34; target=&#34;_blank&#34;&gt;Asar, Fournier and Dantan (2019)&lt;/a&gt; we predict kidney graft survival for patients in the French transplant cohort,
+&lt;a href=&#34;http://www.divat.fr/en&#34; target=&#34;_blank&#34;&gt;DIVAT&lt;/a&gt;. The model is a joint model for longitudinal and
+survival data with non-Gaussian random-effects and measurement error term.
+We propose improved predictions of kidney graft survival compared to the
+model with Gaussian terms that was proposed by &lt;a href=&#34;https://academic.oup.com/ndt/advance-article-abstract/doi/10.1093/ndt/gfz027/5374746&#34; target=&#34;_blank&#34;&gt;Fournier et al.(2019)&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Short-term and long-term effects of acute kidney injury in chronic kidney disease patients - A longitudinal analysis</title>
-      <link>/publication/journal-article/</link>
+      <link>/publication/aki/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>/publication/journal-article/</guid>
+      <guid>/publication/aki/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.

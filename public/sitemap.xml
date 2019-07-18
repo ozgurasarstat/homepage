@@ -34,6 +34,56 @@
   </url>
   
   <url>
+    <loc>/authors/admin/</loc>
+    <lastmod>2019-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication_types/3/</loc>
+    <lastmod>2019-07-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/authors/</loc>
+    <lastmod>2019-07-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/publication/predict-graft-failure/</loc>
+    <lastmod>2019-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/non-gaussian-lda/</loc>
+    <lastmod>2019-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication_types/</loc>
+    <lastmod>2019-07-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/publication/</loc>
+    <lastmod>2019-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/source-themes/</loc>
+    <lastmod>2019-07-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-07-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -62,12 +112,6 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-07-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/joint-models/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -80,42 +124,8 @@
   </url>
   
   <url>
-    <loc>/authors/admin/</loc>
+    <loc>/publication/silc/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication_types/3/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/authors/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/publication/preprint/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication_types/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/publication/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/source-themes/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -152,13 +162,13 @@
   </url>
   
   <url>
-    <loc>/tags/robust-dynamic-predictions/</loc>
+    <loc>/tags/real-time-monitoring/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/project/dynamic-predictions/</loc>
+    <loc>/project/real-time-monitoring/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url>
   
@@ -169,7 +179,7 @@
   </url>
   
   <url>
-    <loc>/publication/journal-article/</loc>
+    <loc>/publication/aki/</loc>
     <lastmod>2015-09-01T00:00:00+00:00</lastmod>
   </url>
   
