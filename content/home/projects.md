@@ -30,8 +30,12 @@ subtitle = ""
     tag = "Non-Gaussian Modelling"
   
   [[content.filter_button]]
-    name = "Real-time monitoring"
-    tag = "Real-time montitoring"
+    name = "Real-time Monitoring"
+    tag = "Real-time Montitoring"
+    
+  [[content.filter_buton]]
+    name = "Statistical Software"
+    tag = "Statistical Software"
 
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.

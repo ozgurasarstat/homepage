@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>R Markdown</title>
-      <link>/tags/r-markdown/</link>
-      <pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r-markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>joint models</title>
       <link>/tags/joint-models/</link>
       <pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate>
@@ -62,6 +53,15 @@
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/tags/real-time-monitoring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Statistical Software</title>
+      <link>/tags/statistical-software/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/statistical-software/</guid>
       <description></description>
     </item>
     

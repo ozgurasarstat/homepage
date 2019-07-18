@@ -141,16 +141,34 @@
     
     <item>
       <title>Robust Joint Models</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <link>/post/robust_joint/</link>
       <pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <guid>/post/robust_joint/</guid>
       <description>
 
 
 &lt;div id=&#34;robust-joint-modelling-framework&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Robust Joint Modelling Framework&lt;/h2&gt;
-&lt;p&gt;Introduce the modelling framework&lt;/p&gt;
+&lt;p&gt;Joint modelling of longitudinal time-to-event outcomes typically
+combines a linear mixed-effects model and a Cox model &lt;a href=&#34;https://academic.oup.com/ije/article/44/1/334/657852&#34;&gt;Asar et al.(2015)&lt;/a&gt;.
+Typical distributional assumption is that random-effects and
+measurement error term in mixed-effects model are Gaussian.
+However, this assumption might not be optimal for real-life
+problems where it is quite likely to have subjects who do not
+conform the population averaged trends (they are examples of
+outliers in the random-effects), and subjects who has a few
+observations that are quite different compared to the rest
+of the observations for subjects’ own collection of measurements
+(they are examples of outliers in the measurement error).&lt;br /&gt;
+Gaussian distribution woud not give appropriate weights to the outliers,
+hence inference might be biased and inefficient, and predictions might be
+misleading. A natural approach would be to replace the Gaussian assumption
+with t distribution. Technical details of non-Gaussian joint modelling is
+skipped here, an interested reader is referred to &lt;a href=&#34;https://arxiv.org/abs/1905.00816&#34;&gt;Asar, Fournier and Dantan&lt;/a&gt;. Below, we describe the
+R package &lt;a href=&#34;https://github.com/ozgurasarstat/robjm&#34;&gt;robjm&lt;/a&gt; to fit the
+joint models with Gaussian and t distributed random-effects and subsequently
+to obtain dynamic predictions.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;implementation&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Implementation&lt;/h2&gt;
@@ -423,6 +441,26 @@ kidney functon at least at a rate of 5% per year.&lt;/p&gt;
 survival data with non-Gaussian random-effects and measurement error term.
 We propose improved predictions of kidney graft survival compared to the
 model with Gaussian terms that was proposed by &lt;a href=&#34;https://academic.oup.com/ndt/advance-article-abstract/doi/10.1093/ndt/gfz027/5374746&#34; target=&#34;_blank&#34;&gt;Fournier et al.(2019)&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Statistical Software</title>
+      <link>/project/statistical-software/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/project/statistical-software/</guid>
+      <description>
+
+&lt;p&gt;This project describes the statistical software that have been prepared o implement the methodologies we developed. So far all the software are in the R platform.&lt;/p&gt;
+
+&lt;h1 id=&#34;lmenssp&#34;&gt;lmenssp&lt;/h1&gt;
+
+&lt;h1 id=&#34;robjm&#34;&gt;robjm&lt;/h1&gt;
+
+&lt;h1 id=&#34;mmm-mmm2&#34;&gt;mmm &amp;amp; mmm2&lt;/h1&gt;
+
+&lt;h1 id=&#34;pnmtrem&#34;&gt;pnmtrem&lt;/h1&gt;
 </description>
     </item>
     

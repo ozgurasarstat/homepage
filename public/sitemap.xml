@@ -101,13 +101,7 @@
   </url>
   
   <url>
-    <loc>/tags/r-markdown/</loc>
-    <lastmod>2019-07-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/2015-07-23-r-rmarkdown/</loc>
+    <loc>/post/robust_joint/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
   </url>
   
@@ -169,6 +163,17 @@
   
   <url>
     <loc>/project/real-time-monitoring/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/statistical-software/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/project/statistical-software/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url>
   

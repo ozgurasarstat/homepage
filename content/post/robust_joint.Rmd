@@ -1,0 +1,42 @@
+---
+title: "Robust Joint Models"
+author: "Özgür Asar"
+date: 2019-07-17
+categories: ["R"]
+tags: ["joint models", "regression"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## Robust Joint Modelling Framework
+
+Joint modelling of longitudinal time-to-event outcomes typically 
+combines a linear mixed-effects model and a Cox model [Asar et al.(2015)](https://academic.oup.com/ije/article/44/1/334/657852). 
+Typical distributional assumption is that random-effects and 
+measurement error term in mixed-effects model are Gaussian. 
+However, this assumption might not be optimal for real-life 
+problems where it is quite likely to have subjects who do not 
+conform the population averaged trends (they are examples of 
+outliers in the random-effects), and subjects who has a few 
+observations that are quite different compared to the rest 
+of the observations for subjects' own collection of measurements 
+(they are examples of outliers in the measurement error).  
+Gaussian distribution woud not give appropriate weights to the outliers, 
+hence inference might be biased and inefficient, and predictions might be 
+misleading. A natural approach would be to replace the Gaussian assumption 
+with t distribution. Technical details of non-Gaussian joint modelling is 
+skipped here, an interested reader is referred to [Asar, Fournier and Dantan](https://arxiv.org/abs/1905.00816). Below, we describe the 
+R package [robjm](https://github.com/ozgurasarstat/robjm) to fit the 
+joint models with Gaussian and t distributed random-effects and subsequently 
+to obtain dynamic predictions. 
+
+## Implementation
+
+Present code to fit the robust models
+
+```{r cars}
+library(MASS)
+```
+
