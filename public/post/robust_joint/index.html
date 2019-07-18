@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Robust Joint Modelling FrameworkJoint modelling of longitudinal time-to-event outcomes typicallycombines a linear mixed-effects model and a Cox model Asar et al.(2015).Typical distributional assumption is that random-effects andmeasurement error term in mixed-effects model are Gaussian.However, this assumption might not be optimal for real-lifeproblems where it is quite likely to have subjects who do notconform the population averaged trends (they are examples ofoutliers in the random-effects), and subjects who has a fewobservations that are quite different compared to the restof the observations for subjects’ own collection of measurements(they are examples of outliers in the measurement error).">
+  <meta name="description" content="Robust Joint Modelling FrameworkJoint modelling of longitudinal time-to-event outcomes typicallycombines a linear mixed-effects model and a Cox model (Asar et al., 2015).Typical distributional assumption is that random-effects andmeasurement error terms in mixed-effects model are Gaussian.However, this assumption might not be restricive for real-lifeproblems where it is quite likely to have subjects who do notconform the population averaged trends (they are examples ofoutliers in the random-effects), and subjects who has a fewobservations that are quite different compared to the restof the observations for subjects’ own collection of measurements(they are examples of outliers in measurement error).">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/robust_joint/">
@@ -112,7 +112,7 @@
   <meta property="og:site_name" content="Özgür Asar, PhD">
   <meta property="og:url" content="/post/robust_joint/">
   <meta property="og:title" content="Robust Joint Models | Özgür Asar, PhD">
-  <meta property="og:description" content="Robust Joint Modelling FrameworkJoint modelling of longitudinal time-to-event outcomes typicallycombines a linear mixed-effects model and a Cox model Asar et al.(2015).Typical distributional assumption is that random-effects andmeasurement error term in mixed-effects model are Gaussian.However, this assumption might not be optimal for real-lifeproblems where it is quite likely to have subjects who do notconform the population averaged trends (they are examples ofoutliers in the random-effects), and subjects who has a fewobservations that are quite different compared to the restof the observations for subjects’ own collection of measurements(they are examples of outliers in the measurement error)."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="Robust Joint Modelling FrameworkJoint modelling of longitudinal time-to-event outcomes typicallycombines a linear mixed-effects model and a Cox model (Asar et al., 2015).Typical distributional assumption is that random-effects andmeasurement error terms in mixed-effects model are Gaussian.However, this assumption might not be restricive for real-lifeproblems where it is quite likely to have subjects who do notconform the population averaged trends (they are examples ofoutliers in the random-effects), and subjects who has a fewobservations that are quite different compared to the restof the observations for subjects’ own collection of measurements(they are examples of outliers in measurement error)."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2019-07-17T00:00:00&#43;00:00">
@@ -516,7 +516,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    2 min read
   </span>
   
 
@@ -651,29 +651,43 @@
 <div id="robust-joint-modelling-framework" class="section level2">
 <h2>Robust Joint Modelling Framework</h2>
 <p>Joint modelling of longitudinal time-to-event outcomes typically
-combines a linear mixed-effects model and a Cox model <a href="https://academic.oup.com/ije/article/44/1/334/657852">Asar et al.(2015)</a>.
+combines a linear mixed-effects model and a Cox model (<a href="https://academic.oup.com/ije/article/44/1/334/657852">Asar et al., 2015</a>).
 Typical distributional assumption is that random-effects and
-measurement error term in mixed-effects model are Gaussian.
-However, this assumption might not be optimal for real-life
+measurement error terms in mixed-effects model are Gaussian.
+However, this assumption might not be restricive for real-life
 problems where it is quite likely to have subjects who do not
 conform the population averaged trends (they are examples of
 outliers in the random-effects), and subjects who has a few
 observations that are quite different compared to the rest
 of the observations for subjects’ own collection of measurements
-(they are examples of outliers in the measurement error).<br />
-Gaussian distribution woud not give appropriate weights to the outliers,
-hence inference might be biased and inefficient, and predictions might be
+(they are examples of outliers in measurement error).
+Gaussian distribution would not give appropriate weights to the outliers,
+hence inference might be biased and inefficient, and personalised predictions might be
 misleading. A natural approach would be to replace the Gaussian assumption
-with t distribution. Technical details of non-Gaussian joint modelling is
-skipped here, an interested reader is referred to <a href="https://arxiv.org/abs/1905.00816">Asar, Fournier and Dantan</a>. Below, we describe the
-R package <a href="https://github.com/ozgurasarstat/robjm">robjm</a> to fit the
-joint models with Gaussian and t distributed random-effects and subsequently
-to obtain dynamic predictions.</p>
+with t distribution. Technical details of joint models with t distributions are
+skipped here, and interested reader is referred to <a href="https://arxiv.org/abs/1905.00816">Asar, Fournier and Dantan (2019)</a>.</p>
 </div>
 <div id="implementation" class="section level2">
 <h2>Implementation</h2>
-<p>Present code to fit the robust models</p>
-<pre class="r"><code>library(MASS)</code></pre>
+<p>We describe the
+R package <a href="https://github.com/ozgurasarstat/robjm"><code>robjm</code></a> to implement the
+joint models with Gaussian and t distributed random-effects and subsequently
+to obtain personalised dynamic predictions. For illustration, we will use the
+AIDS data-set, where biomarker of interest is the CD4 cell counts, and the
+survival event is death.</p>
+<p><code>robjm</code> is still under development, hence is currently only available from Github.
+Note that <code>robjm</code> internatlly calls <code>tidyverse</code>.
+To install it from Github and load into the working environment,
+use the following lines of code:</p>
+<pre class="r"><code>#devtools::install_github(&quot;ozgurasarstat/robjm&quot;)
+#library(robjm)</code></pre>
+<p>AIDS data-set can be loaded by</p>
+<pre class="r"><code>#data(aids)
+#head(aids)</code></pre>
+<p>To be able to fit the joint model, we also need a baseline extract from
+<code>aids</code>:</p>
+<pre class="r"><code>#aids_base &lt;- dplyr::filter(aids, obstime == 0) </code></pre>
+<p>Bayesian + Stan</p>
 </div>
 
     </div>

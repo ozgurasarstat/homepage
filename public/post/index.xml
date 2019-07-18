@@ -23,29 +23,43 @@
 &lt;div id=&#34;robust-joint-modelling-framework&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Robust Joint Modelling Framework&lt;/h2&gt;
 &lt;p&gt;Joint modelling of longitudinal time-to-event outcomes typically
-combines a linear mixed-effects model and a Cox model &lt;a href=&#34;https://academic.oup.com/ije/article/44/1/334/657852&#34;&gt;Asar et al.(2015)&lt;/a&gt;.
+combines a linear mixed-effects model and a Cox model (&lt;a href=&#34;https://academic.oup.com/ije/article/44/1/334/657852&#34;&gt;Asar et al., 2015&lt;/a&gt;).
 Typical distributional assumption is that random-effects and
-measurement error term in mixed-effects model are Gaussian.
-However, this assumption might not be optimal for real-life
+measurement error terms in mixed-effects model are Gaussian.
+However, this assumption might not be restricive for real-life
 problems where it is quite likely to have subjects who do not
 conform the population averaged trends (they are examples of
 outliers in the random-effects), and subjects who has a few
 observations that are quite different compared to the rest
 of the observations for subjects’ own collection of measurements
-(they are examples of outliers in the measurement error).&lt;br /&gt;
-Gaussian distribution woud not give appropriate weights to the outliers,
-hence inference might be biased and inefficient, and predictions might be
+(they are examples of outliers in measurement error).
+Gaussian distribution would not give appropriate weights to the outliers,
+hence inference might be biased and inefficient, and personalised predictions might be
 misleading. A natural approach would be to replace the Gaussian assumption
-with t distribution. Technical details of non-Gaussian joint modelling is
-skipped here, an interested reader is referred to &lt;a href=&#34;https://arxiv.org/abs/1905.00816&#34;&gt;Asar, Fournier and Dantan&lt;/a&gt;. Below, we describe the
-R package &lt;a href=&#34;https://github.com/ozgurasarstat/robjm&#34;&gt;robjm&lt;/a&gt; to fit the
-joint models with Gaussian and t distributed random-effects and subsequently
-to obtain dynamic predictions.&lt;/p&gt;
+with t distribution. Technical details of joint models with t distributions are
+skipped here, and interested reader is referred to &lt;a href=&#34;https://arxiv.org/abs/1905.00816&#34;&gt;Asar, Fournier and Dantan (2019)&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;implementation&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Implementation&lt;/h2&gt;
-&lt;p&gt;Present code to fit the robust models&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(MASS)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We describe the
+R package &lt;a href=&#34;https://github.com/ozgurasarstat/robjm&#34;&gt;&lt;code&gt;robjm&lt;/code&gt;&lt;/a&gt; to implement the
+joint models with Gaussian and t distributed random-effects and subsequently
+to obtain personalised dynamic predictions. For illustration, we will use the
+AIDS data-set, where biomarker of interest is the CD4 cell counts, and the
+survival event is death.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;robjm&lt;/code&gt; is still under development, hence is currently only available from Github.
+Note that &lt;code&gt;robjm&lt;/code&gt; internatlly calls &lt;code&gt;tidyverse&lt;/code&gt;.
+To install it from Github and load into the working environment,
+use the following lines of code:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#devtools::install_github(&amp;quot;ozgurasarstat/robjm&amp;quot;)
+#library(robjm)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;AIDS data-set can be loaded by&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#data(aids)
+#head(aids)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To be able to fit the joint model, we also need a baseline extract from
+&lt;code&gt;aids&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#aids_base &amp;lt;- dplyr::filter(aids, obstime == 0) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Bayesian + Stan&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
