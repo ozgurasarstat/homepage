@@ -516,7 +516,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    3 min read
   </span>
   
 
@@ -676,18 +676,56 @@ to obtain personalised dynamic predictions. For illustration, we will use the
 AIDS data-set, where biomarker of interest is the CD4 cell counts, and the
 survival event is death.</p>
 <p><code>robjm</code> is still under development, hence is currently only available from Github.
-Note that <code>robjm</code> internatlly calls <code>tidyverse</code>.
+Note that <code>robjm</code> internatlly calls <code>tidyverse</code> and <code>rstan</code> packages.
 To install it from Github and load into the working environment,
 use the following lines of code:</p>
-<pre class="r"><code>#devtools::install_github(&quot;ozgurasarstat/robjm&quot;)
-#library(robjm)</code></pre>
+<pre class="r"><code>devtools::install_github(&quot;ozgurasarstat/robjm&quot;, quiet = TRUE)
+suppressMessages(library(robjm))</code></pre>
 <p>AIDS data-set can be loaded by</p>
-<pre class="r"><code>#data(aids)
-#head(aids)</code></pre>
+<pre class="r"><code>data(aids)
+data(aids.id)
+
+aids$drug2 &lt;- ifelse(aids$drug == &quot;ddC&quot;, 0, 1)
+aids.id$drug2 &lt;- ifelse(aids.id$drug == &quot;ddC&quot;, 0, 1)
+
+id_first_100 &lt;- aids.id$patient[1:100]
+
+long_data &lt;- aids[aids$patient %in% id_first_100, ]
+surv_data &lt;- aids.id[aids.id$patient %in% id_first_100, ]
+
+## normal normal model
+fit_nor_nor &lt;- fit_jm(fixed_long = CD4 ~ obstime, 
+                      random_long = ~ obstime, 
+                      fixed_surv = cbind(Time, death) ~ drug2, 
+                      data_long = long_data,
+                      data_surv = surv_data,
+                      id_long = &quot;patient&quot;,
+                      id_surv = &quot;patient&quot;,
+                      model = &quot;nor_nor&quot;,
+                      timeVar = &quot;obstime&quot;,
+                      bh = &quot;weibull&quot;,
+                      chains = 2,
+                      cores = 2,
+                      iter = 2000,
+                      warmup = 1000,
+                      control = list(adapt_delta = 0.8, max_treedepth = 10) 
+                      )
+## Warning: There were 12 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help. See
+## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+## Warning: Examine the pairs() plot to diagnose sampling problems
+## Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+## Running the chains for more iterations may help. See
+## http://mc-stan.org/misc/warnings.html#bulk-ess
+## Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+## Running the chains for more iterations may help. See
+## http://mc-stan.org/misc/warnings.html#tail-ess
+#print(fit_nor_nor, pars = c(&quot;alpha&quot;, &quot;Sigma&quot;, &quot;sigmasq&quot;, &quot;lambda&quot;, &quot;nu&quot;, &quot;omega&quot;, &quot;eta&quot;))
+#traceplot(fit_nor_nor, 
+#          pars = c(&quot;alpha&quot;, &quot;Sigma&quot;, &quot;sigmasq&quot;, &quot;zeta&quot;, &quot;omega&quot;, &quot;eta&quot;),
+#          inc_warmup = FALSE)</code></pre>
 <p>To be able to fit the joint model, we also need a baseline extract from
 <code>aids</code>:</p>
-<pre class="r"><code>#aids_base &lt;- dplyr::filter(aids, obstime == 0) </code></pre>
-<p>Bayesian + Stan</p>
+<pre class="r"><code>aids_base &lt;- dplyr::filter(aids, obstime == 0) </code></pre>
 </div>
 
     </div>

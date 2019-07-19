@@ -39,23 +39,54 @@ AIDS data-set, where biomarker of interest is the CD4 cell counts, and the
 survival event is death. 
 
 `robjm` is still under development, hence is currently only available from Github. 
-Note that `robjm` internatlly calls `tidyverse`. 
+Note that `robjm` internatlly calls `tidyverse` and `rstan` packages. 
 To install it from Github and load into the working environment, 
 use the following lines of code:
 ```{r cars}
-#devtools::install_github("ozgurasarstat/robjm")
-#library(robjm)
+devtools::install_github("ozgurasarstat/robjm", quiet = TRUE)
+suppressMessages(library(robjm))
 ```
 AIDS data-set can be loaded by
 ```{r}
-#data(aids)
-#head(aids)
+data(aids)
+data(aids.id)
+
+aids$drug2 <- ifelse(aids$drug == "ddC", 0, 1)
+aids.id$drug2 <- ifelse(aids.id$drug == "ddC", 0, 1)
+
+id_first_100 <- aids.id$patient[1:100]
+
+long_data <- aids[aids$patient %in% id_first_100, ]
+surv_data <- aids.id[aids.id$patient %in% id_first_100, ]
+
+## normal normal model
+fit_nor_nor <- fit_jm(fixed_long = CD4 ~ obstime, 
+                      random_long = ~ obstime, 
+                      fixed_surv = cbind(Time, death) ~ drug2, 
+                      data_long = long_data,
+                      data_surv = surv_data,
+                      id_long = "patient",
+                      id_surv = "patient",
+                      model = "nor_nor",
+                      timeVar = "obstime",
+                      bh = "weibull",
+                      chains = 2,
+                      cores = 2,
+                      iter = 2000,
+                      warmup = 1000,
+                      control = list(adapt_delta = 0.8, max_treedepth = 10) 
+                      )
+```
+```{r}
+print(fit_nor_nor, 
+      pars = c("alpha", "Sigma", "sigmasq", "lambda", "nu", "omega", "eta"))
+traceplot(fit_nor_nor, 
+          pars = c("alpha", "Sigma", "sigmasq", "lambda", "nu", "omega", "eta"),
+          inc_warmup = FALSE)
 ```
 To be able to fit the joint model, we also need a baseline extract from 
 `aids`:
 ```{r}
-#aids_base <- dplyr::filter(aids, obstime == 0) 
+aids_base <- dplyr::filter(aids, obstime == 0) 
 ```
 
-
-Bayesian + Stan
