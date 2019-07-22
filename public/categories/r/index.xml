@@ -23,49 +23,59 @@
 &lt;div id=&#34;robust-joint-modelling-framework&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Robust Joint Modelling Framework&lt;/h2&gt;
 &lt;p&gt;Joint modelling of longitudinal time-to-event outcomes typically
-combines a linear mixed-effects model and a Cox model (&lt;a href=&#34;https://academic.oup.com/ije/article/44/1/334/657852&#34;&gt;Asar et al., 2015&lt;/a&gt;).
+combines a linear mixed-effects model for repeated measures
+and a Cox model with time-varying frailty for time-to-event outcome (&lt;a href=&#34;https://academic.oup.com/ije/article/44/1/334/657852&#34;&gt;Asar et al., 2015&lt;/a&gt;).
 Typical distributional assumption is that random-effects and
 measurement error terms in mixed-effects model are Gaussian.
-However, this assumption might not be restricive for real-life
-problems where it is quite likely to have subjects who do not
+However, this assumption might be restricive for real-life
+problems, where it is quite likely to have&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;subjects who do not
 conform the population averaged trends (they are examples of
-outliers in the random-effects), and subjects who has a few
+outliers in the random-effects), and&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;subjects who has a few
 observations that are quite different compared to the rest
 of the observations for subjects’ own collection of measurements
-(they are examples of outliers in measurement error).
-Gaussian distribution would not give appropriate weights to the outliers,
+(they are examples of outliers in measurement error).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Gaussian distribution would not give appropriate weights to the outliers,
 hence inference might be biased and inefficient, and personalised predictions might be
 misleading. A natural approach would be to replace the Gaussian assumption
-with t distribution. Technical details of joint models with t distributions are
+with t distribution. Technical details of joint models with t distributions,
+and associated inferential methods are
 skipped here, and interested reader is referred to &lt;a href=&#34;https://arxiv.org/abs/1905.00816&#34;&gt;Asar, Fournier and Dantan (2019)&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;implementation&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Implementation&lt;/h2&gt;
 &lt;p&gt;We describe the
 R package &lt;a href=&#34;https://github.com/ozgurasarstat/robjm&#34;&gt;&lt;code&gt;robjm&lt;/code&gt;&lt;/a&gt; to implement the
-joint models with Gaussian and t distributed random-effects and subsequently
-to obtain personalised dynamic predictions. For illustration, we will use the
-AIDS data-set, where biomarker of interest is the CD4 cell counts, and the
+joint models with Gaussian and t distributed random-effects and error terms,
+and subsequently to obtain personalised dynamic predictions.
+For illustration, we will use the
+AIDS data-set (first 100 subjects only).
+Note that the biomarker of interest is the CD4 cell counts, and the
 survival event is death.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;robjm&lt;/code&gt; is still under development, hence is currently only available from Github.
-Note that &lt;code&gt;robjm&lt;/code&gt; internatlly calls &lt;code&gt;tidyverse&lt;/code&gt; and &lt;code&gt;rstan&lt;/code&gt; packages.
-To install it from Github and load into the working environment,
-use the following lines of code:&lt;/p&gt;
+Note that &lt;code&gt;robjm&lt;/code&gt; internatlly calls &lt;code&gt;tidyverse&lt;/code&gt; and &lt;code&gt;rstan&lt;/code&gt; packages.&lt;/p&gt;
+&lt;p&gt;To install &lt;code&gt;robjm&lt;/code&gt; from Github and load into the working environment,
+use the following lines:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;devtools::install_github(&amp;quot;ozgurasarstat/robjm&amp;quot;, quiet = TRUE)
 suppressMessages(library(robjm))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;AIDS data-set can be loaded by&lt;/p&gt;
+&lt;p&gt;AIDS data-set can be loaded prepared for analysis using&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data(aids)
 data(aids.id)
 
 aids$drug2 &amp;lt;- ifelse(aids$drug == &amp;quot;ddC&amp;quot;, 0, 1)
 aids.id$drug2 &amp;lt;- ifelse(aids.id$drug == &amp;quot;ddC&amp;quot;, 0, 1)
 
-id_first_100 &amp;lt;- aids.id$patient[1:100]
+id_first_250 &amp;lt;- aids.id$patient[1:250]
 
-long_data &amp;lt;- aids[aids$patient %in% id_first_100, ]
-surv_data &amp;lt;- aids.id[aids.id$patient %in% id_first_100, ]
-
-## normal normal model
+long_data &amp;lt;- aids[aids$patient %in% id_first_250, ]
+surv_data &amp;lt;- aids.id[aids.id$patient %in% id_first_250, ]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Below, we first fit the joint model with Gaussian random effects and
+Gaussian error terms, and then t distributed random effects and
+t distributed error terms.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## normal normal model
 fit_nor_nor &amp;lt;- fit_jm(fixed_long = CD4 ~ obstime, 
                       random_long = ~ obstime, 
                       fixed_surv = cbind(Time, death) ~ drug2, 
@@ -80,22 +90,67 @@ fit_nor_nor &amp;lt;- fit_jm(fixed_long = CD4 ~ obstime,
                       cores = 2,
                       iter = 2000,
                       warmup = 1000,
-                      control = list(adapt_delta = 0.8, max_treedepth = 10) 
+                      control = list(adapt_delta = 0.9) 
                       )
-## Warning: There were 12 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help. See
-## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-## Warning: Examine the pairs() plot to diagnose sampling problems
 ## Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 ## Running the chains for more iterations may help. See
 ## http://mc-stan.org/misc/warnings.html#bulk-ess
 ## Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 ## Running the chains for more iterations may help. See
 ## http://mc-stan.org/misc/warnings.html#tail-ess
-#print(fit_nor_nor, pars = c(&amp;quot;alpha&amp;quot;, &amp;quot;Sigma&amp;quot;, &amp;quot;sigmasq&amp;quot;, &amp;quot;lambda&amp;quot;, &amp;quot;nu&amp;quot;, &amp;quot;omega&amp;quot;, &amp;quot;eta&amp;quot;))
-#traceplot(fit_nor_nor, 
-#          pars = c(&amp;quot;alpha&amp;quot;, &amp;quot;Sigma&amp;quot;, &amp;quot;sigmasq&amp;quot;, &amp;quot;zeta&amp;quot;, &amp;quot;omega&amp;quot;, &amp;quot;eta&amp;quot;),
-#          inc_warmup = FALSE)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To be able to fit the joint model, we also need a baseline extract from
+
+fit_t_t &amp;lt;- fit_jm(fixed_long = CD4 ~ obstime, 
+                  random_long = ~ obstime, 
+                  fixed_surv = cbind(Time, death) ~ drug2, 
+                  data_long = long_data,
+                  data_surv = surv_data,
+                  id_long = &amp;quot;patient&amp;quot;,
+                  id_surv = &amp;quot;patient&amp;quot;,
+                  model = &amp;quot;nor_nor&amp;quot;,
+                  timeVar = &amp;quot;obstime&amp;quot;,
+                  bh = &amp;quot;weibull&amp;quot;,
+                  chains = 2,
+                  cores = 2,
+                  iter = 2000,
+                  warmup = 1000,
+                  control = list(adapt_delta = 0.9) 
+                  )
+## recompiling to avoid crashing R session
+## Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+## Running the chains for more iterations may help. See
+## http://mc-stan.org/misc/warnings.html#bulk-ess
+
+## Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+## Running the chains for more iterations may help. See
+## http://mc-stan.org/misc/warnings.html#tail-ess&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(fit_nor_nor$res, 
+      pars = c(&amp;quot;alpha&amp;quot;, &amp;quot;Sigma&amp;quot;, &amp;quot;sigmasq&amp;quot;, &amp;quot;lambda&amp;quot;, &amp;quot;nu&amp;quot;, &amp;quot;omega&amp;quot;, &amp;quot;eta&amp;quot;))
+## Inference for Stan model: cc3bb0e249a9f8cb9af6f1735fffcd05.
+## 2 chains, each with iter=2000; warmup=1000; thin=1; 
+## post-warmup draws per chain=1000, total post-warmup draws=2000.
+## 
+##             mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
+## alpha[1]    7.60    0.02 0.33  6.97  7.37  7.61  7.83  8.22   173 1.01
+## alpha[2]   -0.20    0.00 0.02 -0.24 -0.21 -0.20 -0.18 -0.15   677 1.00
+## Sigma[1,1] 22.35    0.06 2.26 18.37 20.79 22.21 23.82 27.13  1262 1.00
+## Sigma[1,2]  0.09    0.00 0.11 -0.13  0.02  0.09  0.16  0.32   578 1.00
+## Sigma[2,1]  0.09    0.00 0.11 -0.13  0.02  0.09  0.16  0.32   578 1.00
+## Sigma[2,2]  0.04    0.00 0.01  0.02  0.03  0.04  0.05  0.06   164 1.02
+## sigmasq     3.61    0.01 0.28  3.10  3.41  3.59  3.80  4.18   819 1.00
+## lambda      0.06    0.00 0.03  0.02  0.04  0.06  0.08  0.14  1029 1.00
+## nu          1.32    0.00 0.15  1.04  1.21  1.31  1.41  1.63  1354 1.00
+## omega[1]    0.52    0.01 0.26  0.03  0.34  0.52  0.69  1.04  1982 1.00
+## eta        -0.49    0.00 0.08 -0.68 -0.54 -0.48 -0.43 -0.35   778 1.00
+## 
+## Samples were drawn using NUTS(diag_e) at Fri Jul 19 16:20:31 2019.
+## For each parameter, n_eff is a crude measure of effective sample size,
+## and Rhat is the potential scale reduction factor on split chains (at 
+## convergence, Rhat=1).
+traceplot(fit_nor_nor$res, 
+          pars = c(&amp;quot;alpha&amp;quot;, &amp;quot;Sigma&amp;quot;, &amp;quot;sigmasq&amp;quot;, &amp;quot;lambda&amp;quot;, &amp;quot;nu&amp;quot;, &amp;quot;omega&amp;quot;, &amp;quot;eta&amp;quot;),
+          inc_warmup = FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/robust_joint_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;
+To be able to fit the joint model, we also need a baseline extract from
 &lt;code&gt;aids&lt;/code&gt;:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;aids_base &amp;lt;- dplyr::filter(aids, obstime == 0) &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
