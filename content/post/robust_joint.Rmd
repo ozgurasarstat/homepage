@@ -53,7 +53,7 @@ Note that `robjm` internatlly calls `tidyverse` and `rstan` packages.
 To install `robjm` from Github and load into the working environment, 
 use the following lines:
 ```{r cars}
-devtools::install_github("ozgurasarstat/robjm", quiet = TRUE)
+#devtools::install_github("ozgurasarstat/robjm", quiet = TRUE)
 suppressMessages(library(robjm))
 ```
 AIDS data-set can be loaded prepared for analysis using
@@ -84,11 +84,11 @@ fit_nor_nor <- fit_jm(fixed_long = CD4 ~ obstime,
                       model = "nor_nor",
                       timeVar = "obstime",
                       bh = "weibull",
-                      chains = 2,
-                      cores = 2,
-                      iter = 4000,
-                      warmup = 2000,
-                      control = list(adapt_delta = 0.9) 
+                      chains = 4,
+                      cores = 4,
+                      iter = 2000,
+                      warmup = 1000,
+                      control = list(adapt_delta = 0.9)
                       )
 
 fit_t_t <- fit_jm(fixed_long = CD4 ~ obstime, 
@@ -101,11 +101,11 @@ fit_t_t <- fit_jm(fixed_long = CD4 ~ obstime,
                   model = "t_t_mod3",
                   timeVar = "obstime",
                   bh = "weibull",
-                  chains = 2,
-                  cores = 2,
-                  iter = 4000,
-                  warmup = 2000,
-                  control = list(adapt_delta = 0.9) 
+                  chains = 4,
+                  cores = 4,
+                  iter = 2000,
+                  warmup = 1000,
+                  control = list(adapt_delta = 0.9)
                   )
 ```
 
@@ -135,12 +135,14 @@ newdata <- dplyr::filter(aids, patient == idlist[251])
 fore_nor_nor <- predSurv_jm(object = fit_nor_nor, 
                             newdata = newdata, 
                             forecast = list(h = 5, n = 5),
-                            B_control = list(nsel_b = 1))
+                            B_control = list(nsel_b = 1, init = 0)
+                            )
  
 fore_t_t <- predSurv_jm(object = fit_t_t, 
                         newdata = newdata, 
                         forecast = list(h = 5, n = 5),
-                        B_control = list(nsel_b = 1)) 
+                        B_control = list(nsel_b = 1, init = 0)
+                        ) 
 
 fore_nor_nor$output
 fore_t_t$output
