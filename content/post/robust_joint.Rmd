@@ -72,7 +72,7 @@ surv_data <- aids.id[aids.id$patient %in% idlist[1:250], ]
 Below, we first fit the joint model with Gaussian random effects and 
 Gaussian error terms, and then t distributed random effects and 
 t distributed error terms.
-```{r}
+```{r echo = T, results = 'hide', message = FALSE, warning = FALSE}
 ## normal normal model
 fit_nor_nor <- fit_jm(fixed_long = CD4 ~ obstime, 
                       random_long = ~ obstime, 
@@ -86,14 +86,14 @@ fit_nor_nor <- fit_jm(fixed_long = CD4 ~ obstime,
                       bh = "weibull",
                       chains = 4,
                       cores = 4,
-                      iter = 200,
-                      warmup = 100,
+                      iter = 2000,
+                      warmup = 1000,
                       control = list(adapt_delta = 0.9)
                       )
 
-fit_t_t <- fit_jm(fixed_long = CD4 ~ obstime, 
-                  random_long = ~ obstime, 
-                  fixed_surv = cbind(Time, death) ~ drug2, 
+fit_t_t <- fit_jm(fixed_long = CD4 ~ obstime,
+                  random_long = ~ obstime,
+                  fixed_surv = cbind(Time, death) ~ drug2,
                   data_long = long_data,
                   data_surv = surv_data,
                   id_long = "patient",
@@ -103,8 +103,8 @@ fit_t_t <- fit_jm(fixed_long = CD4 ~ obstime,
                   bh = "weibull",
                   chains = 4,
                   cores = 4,
-                  iter = 200,
-                  warmup = 100,
+                  iter = 2000,
+                  warmup = 1000,
                   control = list(adapt_delta = 0.9)
                   )
 ```
@@ -113,9 +113,9 @@ fit_t_t <- fit_jm(fixed_long = CD4 ~ obstime,
 print(fit_nor_nor$res, 
       pars = c("alpha", "Sigma", "sigmasq", "log_lambda", 
                "log_nu", "omega", "eta"))
-print(fit_t_t$res, 
-      pars = c("alpha", "Sigma", "sigmasq", "phi", "delta", 
-               "log_lambda", "log_nu", "omega", "eta"))
+ print(fit_t_t$res, 
+       pars = c("alpha", "Sigma", "sigmasq", "phi", "delta", 
+                "log_lambda", "log_nu", "omega", "eta"))
 ```
 Traceplots of the MCMC samples can be visualised by
 ```{r}
@@ -123,13 +123,13 @@ traceplot(fit_nor_nor$res,
           pars = c("alpha", "Sigma", "sigmasq", "log_lambda", 
                    "log_nu", "omega", "eta"),
           inc_warmup = FALSE)
-traceplot(fit_t_t$res, 
-          pars = c("alpha", "Sigma", "sigmasq", "phi", "delta", 
-                   "log_lambda", "log_nu", "omega", "eta"),
-          inc_warmup = FALSE)
+ traceplot(fit_t_t$res, 
+           pars = c("alpha", "Sigma", "sigmasq", "phi", "delta", 
+                    "log_lambda", "log_nu", "omega", "eta"),
+           inc_warmup = FALSE)
 ```
 Dynamic predictions for a new subject, say 251th subject, can be obtained by
-```{r message = FALSE}
+```{r echo = T, results = 'hide', message = FALSE, warning = FALSE}
 newdata <- dplyr::filter(aids, patient == idlist[251])
 
 fore_nor_nor <- predSurv_jm(object = fit_nor_nor, 
@@ -139,13 +139,14 @@ fore_nor_nor <- predSurv_jm(object = fit_nor_nor,
                             )
  
 fore_t_t <- predSurv_jm(object = fit_t_t, 
-                        newdata = newdata, 
-                        forecast = list(h = 5, n = 5),
-                        B_control = list(nsel_b = 1, init = 0)
-                        ) 
+                       newdata = newdata, 
+                       forecast = list(h = 5, n = 5),
+                       B_control = list(nsel_b = 1, init = 0)
+                       ) 
 ```
 The output would be displayed as a matrix by
 ```{r}
 fore_nor_nor$output
+
 fore_t_t$output
 ```
