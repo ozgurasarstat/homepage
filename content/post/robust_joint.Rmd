@@ -135,15 +135,13 @@ newdata <- dplyr::filter(aids, patient == idlist[251])
 fore_nor_nor <- predSurv_jm(object = fit_nor_nor, 
                             newdata = newdata, 
                             forecast = list(h = 5, n = 5),
-                            B_control = list(nsel_b = 1),
-                            batch_control = list(size = 2, cores = 2))
+                            B_control = list(nsel_b = 1))
  
 fore_t_t <- predSurv_jm(object = fit_t_t, 
                         newdata = newdata, 
                         forecast = list(h = 5, n = 5),
-                        B_control = list(nsel_b = 1),
-                        batch_control = list(size = 2, cores = 2)) 
+                        B_control = list(nsel_b = 1)) 
 
-for_nor_nor$output
-for_t_t$output
+fore_nor_nor$output
+fore_t_t$output
 ```
