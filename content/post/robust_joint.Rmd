@@ -86,8 +86,8 @@ fit_nor_nor <- fit_jm(fixed_long = CD4 ~ obstime,
                       bh = "weibull",
                       chains = 4,
                       cores = 4,
-                      iter = 2000,
-                      warmup = 1000,
+                      iter = 200,
+                      warmup = 100,
                       control = list(adapt_delta = 0.9)
                       )
 
@@ -103,8 +103,8 @@ fit_t_t <- fit_jm(fixed_long = CD4 ~ obstime,
                   bh = "weibull",
                   chains = 4,
                   cores = 4,
-                  iter = 2000,
-                  warmup = 1000,
+                  iter = 200,
+                  warmup = 100,
                   control = list(adapt_delta = 0.9)
                   )
 ```
@@ -129,7 +129,7 @@ traceplot(fit_t_t$res,
           inc_warmup = FALSE)
 ```
 Dynamic predictions for a new subject, say 251th subject, can be obtained by
-```{r}
+```{r message = FALSE}
 newdata <- dplyr::filter(aids, patient == idlist[251])
 
 fore_nor_nor <- predSurv_jm(object = fit_nor_nor, 
@@ -143,7 +143,9 @@ fore_t_t <- predSurv_jm(object = fit_t_t,
                         forecast = list(h = 5, n = 5),
                         B_control = list(nsel_b = 1, init = 0)
                         ) 
-
+```
+The output would be displayed as a matrix by
+```{r}
 fore_nor_nor$output
 fore_t_t$output
 ```
