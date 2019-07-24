@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-bio: My research interests include statistical theory and applications.
+bio: My research interests mainly focuse on statistical theory, computation and applications.
 education:
   courses:
   - course: PhD in Statistics & Epidemiology
