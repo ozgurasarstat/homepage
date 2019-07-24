@@ -68,10 +68,9 @@ long_data <- aids[aids$patient %in% idlist[1:250], ]
 surv_data <- aids.id[aids.id$patient %in% idlist[1:250], ]
 ```
 Below, we first fit the joint model with Gaussian random effects and 
-Gaussian error terms, and then t distributed random effects and 
+Gaussian error terms, and then Gaussian random effects and 
 t distributed error terms.
 ```{r echo = T, results = 'hide', message = FALSE, warning = FALSE}
-## normal normal model
 fit_nor_nor <- fit_jm(fixed_long = CD4 ~ obstime, 
                       random_long = ~ obstime, 
                       fixed_surv = cbind(Time, death) ~ drug2, 
@@ -106,7 +105,7 @@ fit_nor_t <- fit_jm(fixed_long = CD4 ~ obstime,
                   control = list(adapt_delta = 0.9)
                   )
 ```
-
+The results can be summarised by
 ```{r}
 print(fit_nor_nor$res, 
       pars = c("alpha", "Sigma", "sigmasq", "log_lambda", 
