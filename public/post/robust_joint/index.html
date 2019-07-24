@@ -686,12 +686,11 @@ AIDS data-set (first 250 subjects only).
 Note that the biomarker of interest is the CD4 cell counts, and the
 survival event is death.</p>
 <p><code>robjm</code> is still under development, hence is currently only available from Github.
-Note that <code>robjm</code> internatlly calls <code>tidyverse</code> and <code>rstan</code> packages.</p>
-<p>To install <code>robjm</code> from Github and load into the working environment,
+To install <code>robjm</code> from Github and load into the working environment,
 use the following lines:</p>
-<pre class="r"><code>#devtools::install_github(&quot;ozgurasarstat/robjm&quot;, quiet = TRUE)
+<pre class="r"><code>devtools::install_github(&quot;ozgurasarstat/robjm&quot;, quiet = TRUE)
 suppressMessages(library(robjm))</code></pre>
-<p>AIDS data-set can be loaded prepared for analysis using</p>
+<p>AIDS data-set can be loaded and prepared for analysis using</p>
 <pre class="r"><code>data(aids)
 data(aids.id)
 
@@ -723,14 +722,14 @@ fit_nor_nor &lt;- fit_jm(fixed_long = CD4 ~ obstime,
                       control = list(adapt_delta = 0.9)
                       )
 
-fit_t_t &lt;- fit_jm(fixed_long = CD4 ~ obstime,
+fit_nor_t &lt;- fit_jm(fixed_long = CD4 ~ obstime,
                   random_long = ~ obstime,
                   fixed_surv = cbind(Time, death) ~ drug2,
                   data_long = long_data,
                   data_surv = surv_data,
                   id_long = &quot;patient&quot;,
                   id_surv = &quot;patient&quot;,
-                  model = &quot;t_t_mod3&quot;,
+                  model = &quot;nor_t_mod3&quot;,
                   timeVar = &quot;obstime&quot;,
                   bh = &quot;weibull&quot;,
                   chains = 4,
@@ -747,45 +746,44 @@ fit_t_t &lt;- fit_jm(fixed_long = CD4 ~ obstime,
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##             mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
-## alpha[1]    7.62    0.02 0.31  7.01  7.40  7.62  7.83  8.20   375 1.01
-## alpha[2]   -0.19    0.00 0.02 -0.24 -0.21 -0.19 -0.18 -0.15  1508 1.00
-## Sigma[1,1] 22.34    0.04 2.24 18.39 20.76 22.20 23.76 27.00  2956 1.00
-## Sigma[1,2]  0.09    0.00 0.11 -0.12  0.01  0.09  0.16  0.31  1162 1.00
-## Sigma[2,1]  0.09    0.00 0.11 -0.12  0.01  0.09  0.16  0.31  1162 1.00
-## Sigma[2,2]  0.04    0.00 0.01  0.02  0.03  0.04  0.04  0.06   348 1.01
-## sigmasq     3.61    0.01 0.27  3.11  3.42  3.60  3.79  4.19  1081 1.00
-## log_lambda -2.90    0.01 0.49 -3.89 -3.24 -2.91 -2.57 -1.95  2353 1.00
-## log_nu      0.27    0.00 0.12  0.02  0.20  0.28  0.36  0.49  2160 1.00
-## omega[1]    0.52    0.00 0.26  0.02  0.34  0.52  0.70  1.04  3523 1.00
-## eta        -0.49    0.00 0.08 -0.67 -0.54 -0.48 -0.43 -0.35  1511 1.00
+## alpha[1]    7.62    0.02 0.32  7.01  7.40  7.62  7.83  8.26   438 1.01
+## alpha[2]   -0.20    0.00 0.02 -0.24 -0.21 -0.20 -0.18 -0.15  1630 1.00
+## Sigma[1,1] 22.24    0.04 2.19 18.45 20.72 22.11 23.69 26.88  3849 1.00
+## Sigma[1,2]  0.10    0.00 0.11 -0.12  0.02  0.10  0.17  0.31  1161 1.00
+## Sigma[2,1]  0.10    0.00 0.11 -0.12  0.02  0.10  0.17  0.31  1161 1.00
+## Sigma[2,2]  0.04    0.00 0.01  0.02  0.03  0.04  0.05  0.06   373 1.01
+## sigmasq     3.61    0.01 0.28  3.11  3.41  3.59  3.79  4.19   958 1.00
+## log_lambda -2.89    0.01 0.49 -3.85 -3.21 -2.90 -2.57 -1.89  2315 1.00
+## log_nu      0.27    0.00 0.12  0.01  0.19  0.27  0.35  0.50  2586 1.00
+## omega[1]    0.53    0.00 0.26  0.03  0.35  0.52  0.70  1.06  3295 1.00
+## eta        -0.49    0.00 0.08 -0.68 -0.54 -0.48 -0.43 -0.35  1471 1.00
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Jul 23 19:35:54 2019.
+## Samples were drawn using NUTS(diag_e) at Wed Jul 24 11:56:50 2019.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).
- print(fit_t_t$res, 
-       pars = c(&quot;alpha&quot;, &quot;Sigma&quot;, &quot;sigmasq&quot;, &quot;phi&quot;, &quot;delta&quot;, 
-                &quot;log_lambda&quot;, &quot;log_nu&quot;, &quot;omega&quot;, &quot;eta&quot;))
-## Inference for Stan model: 69f8702e79f5fb7927b6416c942566e8.
+print(fit_nor_t$res, 
+      pars = c(&quot;alpha&quot;, &quot;Sigma&quot;, &quot;sigmasq&quot;, &quot;delta&quot;, 
+               &quot;log_lambda&quot;, &quot;log_nu&quot;, &quot;omega&quot;, &quot;eta&quot;))
+## Inference for Stan model: 3350d3e47d14b2f21179f624bafbbcb5.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
-##             mean se_mean    sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
-## alpha[1]    7.49    0.02  0.32  6.86  7.27  7.48  7.70  8.11   386 1.01
-## alpha[2]   -0.19    0.00  0.02 -0.23 -0.21 -0.19 -0.18 -0.15  1659 1.00
-## Sigma[1,1] 21.69    0.09  2.31 17.41 20.07 21.60 23.17 26.48   607 1.01
-## Sigma[1,2]  0.08    0.00  0.09 -0.09  0.02  0.07  0.14  0.25  1461 1.00
-## Sigma[2,1]  0.08    0.00  0.09 -0.09  0.02  0.07  0.14  0.25  1461 1.00
-## Sigma[2,2]  0.02    0.00  0.01  0.01  0.02  0.02  0.03  0.04   198 1.03
-## sigmasq     1.43    0.01  0.22  1.04  1.28  1.42  1.58  1.90   251 1.02
-## phi        40.56    2.85 23.14  9.48 21.69 35.61 54.90 94.00    66 1.08
-## delta       3.14    0.04  0.52  2.31  2.75  3.09  3.45  4.28   216 1.02
-## log_lambda -2.98    0.01  0.48 -3.90 -3.32 -2.98 -2.65 -2.06  3986 1.00
-## log_nu      0.27    0.00  0.12  0.05  0.20  0.28  0.35  0.49  3817 1.00
-## omega[1]    0.47    0.00  0.24  0.01  0.31  0.47  0.63  0.93  5890 1.00
-## eta        -0.45    0.00  0.07 -0.60 -0.49 -0.44 -0.40 -0.32  2944 1.00
+##             mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
+## alpha[1]    7.57    0.02 0.31  6.96  7.37  7.58  7.78  8.18   322 1.01
+## alpha[2]   -0.19    0.00 0.02 -0.23 -0.21 -0.19 -0.18 -0.15  1298 1.00
+## Sigma[1,1] 22.84    0.03 2.21 18.87 21.31 22.68 24.22 27.68  4331 1.00
+## Sigma[1,2]  0.08    0.00 0.09 -0.09  0.03  0.08  0.14  0.26  1517 1.00
+## Sigma[2,1]  0.08    0.00 0.09 -0.09  0.03  0.08  0.14  0.26  1517 1.00
+## Sigma[2,2]  0.02    0.00 0.01  0.01  0.02  0.02  0.03  0.04   322 1.02
+## sigmasq     1.44    0.01 0.22  1.03  1.29  1.42  1.59  1.90   306 1.01
+## delta       3.17    0.04 0.56  2.29  2.77  3.09  3.49  4.49   225 1.01
+## log_lambda -2.97    0.01 0.46 -3.88 -3.29 -2.96 -2.66 -2.06  2714 1.00
+## log_nu      0.27    0.00 0.11  0.05  0.20  0.27  0.35  0.48  3123 1.00
+## omega[1]    0.47    0.00 0.23  0.03  0.32  0.47  0.62  0.96  4814 1.00
+## eta        -0.45    0.00 0.07 -0.60 -0.49 -0.44 -0.40 -0.33  1852 1.00
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Jul 23 19:55:12 2019.
+## Samples were drawn using NUTS(diag_e) at Wed Jul 24 12:12:10 2019.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -795,12 +793,13 @@ fit_t_t &lt;- fit_jm(fixed_long = CD4 ~ obstime,
                    &quot;log_nu&quot;, &quot;omega&quot;, &quot;eta&quot;),
           inc_warmup = FALSE)</code></pre>
 <p><img src="/post/robust_joint_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<pre class="r"><code> traceplot(fit_t_t$res, 
-           pars = c(&quot;alpha&quot;, &quot;Sigma&quot;, &quot;sigmasq&quot;, &quot;phi&quot;, &quot;delta&quot;, 
-                    &quot;log_lambda&quot;, &quot;log_nu&quot;, &quot;omega&quot;, &quot;eta&quot;),
-           inc_warmup = FALSE)</code></pre>
+<pre class="r"><code>traceplot(fit_nor_t$res, 
+          pars = c(&quot;alpha&quot;, &quot;Sigma&quot;, &quot;sigmasq&quot;, &quot;delta&quot;, 
+                   &quot;log_lambda&quot;, &quot;log_nu&quot;, &quot;omega&quot;, &quot;eta&quot;),
+          inc_warmup = FALSE)</code></pre>
 <p><img src="/post/robust_joint_files/figure-html/unnamed-chunk-4-2.png" width="672" />
-Dynamic predictions for a new subject, say 251th subject, can be obtained by</p>
+1-, 2-, 3-, 4- and 5-year survival probabilities for a new subject,
+say 251th subject, can be obtained by</p>
 <pre class="r"><code>newdata &lt;- dplyr::filter(aids, patient == idlist[251])
 
 fore_nor_nor &lt;- predSurv_jm(object = fit_nor_nor, 
@@ -809,29 +808,29 @@ fore_nor_nor &lt;- predSurv_jm(object = fit_nor_nor,
                             B_control = list(nsel_b = 1, init = 0)
                             )
  
-fore_t_t &lt;- predSurv_jm(object = fit_t_t, 
-                       newdata = newdata, 
-                       forecast = list(h = 5, n = 5),
-                       B_control = list(nsel_b = 1, init = 0)
-                       ) </code></pre>
+fore_nor_t &lt;- predSurv_jm(object = fit_nor_t, 
+                          newdata = newdata, 
+                          forecast = list(h = 5, n = 5),
+                          B_control = list(nsel_b = 1, init = 0)
+                          ) </code></pre>
 <p>The output would be displayed as a matrix by</p>
 <pre class="r"><code>fore_nor_nor$output
 ##    id  time      mean      2.5%       50%     97.5%
 ## 1 251 12.67 1.0000000 1.0000000 1.0000000 1.0000000
-## 2 251 13.67 0.9388233 0.8151943 0.9508994 0.9886428
-## 3 251 14.67 0.8720210 0.6213313 0.8959580 0.9766481
-## 4 251 15.67 0.8010925 0.4295851 0.8358410 0.9636754
-## 5 251 16.67 0.7280174 0.2634484 0.7701099 0.9503350
-## 6 251 17.67 0.6549468 0.1384544 0.6998950 0.9354523
+## 2 251 13.67 0.9400824 0.8176829 0.9520548 0.9890074
+## 3 251 14.67 0.8745544 0.6296807 0.8983518 0.9772385
+## 4 251 15.67 0.8047943 0.4419347 0.8393634 0.9648468
+## 5 251 16.67 0.7326644 0.2742090 0.7743737 0.9517571
+## 6 251 17.67 0.6602755 0.1448791 0.7045594 0.9376878
 
-fore_t_t$output
+fore_nor_t$output
 ##    id  time      mean      2.5%       50%     97.5%
 ## 1 251 12.67 1.0000000 1.0000000 1.0000000 1.0000000
-## 2 251 13.67 0.9390371 0.8574971 0.9449569 0.9810578
-## 3 251 14.67 0.8736750 0.7066903 0.8856929 0.9610025
-## 4 251 15.67 0.8048087 0.5550810 0.8229350 0.9391816
-## 5 251 16.67 0.7336541 0.4086381 0.7558281 0.9163313
-## 6 251 17.67 0.6616660 0.2788733 0.6857106 0.8928838</code></pre>
+## 2 251 13.67 0.9400306 0.8616196 0.9468582 0.9807234
+## 3 251 14.67 0.8756646 0.7181637 0.8889777 0.9610929
+## 4 251 15.67 0.8077314 0.5731703 0.8271389 0.9396137
+## 5 251 16.67 0.7373979 0.4297546 0.7624929 0.9169161
+## 6 251 17.67 0.6661016 0.3011430 0.6949210 0.8945066</code></pre>
 </div>
 
     </div>

@@ -112,7 +112,7 @@ print(fit_nor_nor$res,
       pars = c("alpha", "Sigma", "sigmasq", "log_lambda", 
                "log_nu", "omega", "eta"))
 print(fit_nor_t$res, 
-      pars = c("alpha", "Sigma", "sigmasq", "phi", "delta", 
+      pars = c("alpha", "Sigma", "sigmasq", "delta", 
                "log_lambda", "log_nu", "omega", "eta"))
 ```
 Traceplots of the MCMC samples can be visualised by
@@ -122,7 +122,7 @@ traceplot(fit_nor_nor$res,
                    "log_nu", "omega", "eta"),
           inc_warmup = FALSE)
 traceplot(fit_nor_t$res, 
-          pars = c("alpha", "Sigma", "sigmasq", "phi", "delta", 
+          pars = c("alpha", "Sigma", "sigmasq", "delta", 
                    "log_lambda", "log_nu", "omega", "eta"),
           inc_warmup = FALSE)
 ```
