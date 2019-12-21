@@ -43,7 +43,7 @@ user_groups:
 - Visitors
 ---
 
-I aam currently an assistant professor at the Department of Biostatistics and Medical Informatics, Acıbadem Mehmet Ali Aydınlar University, in İstanbul, Turkey.
+I am currently an assistant professor at the Department of Biostatistics and Medical Informatics, Acıbadem Mehmet Ali Aydınlar University, in İstanbul, Turkey.
 
 I received my PhD in Statistics and Epidemiology from Lancaster University in August 2015. Prof. Peter Diggle was my PhD advisor. Upon completing my PhD studies, I worked as a post-doctoral research associate with Prof. Peter Diggle on a number of collaborative projects.
 
