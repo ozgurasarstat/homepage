@@ -7,7 +7,7 @@ tags: ["stochastic volatility", "financial time series"]
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 # Turkish Airlines Stock Data
