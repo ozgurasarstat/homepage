@@ -1,7 +1,7 @@
 ---
 title: "Stochastic Volatility Models"
 author: "Özgür Asar"
-date: "12/21/2019"
+date: 2019-12-21
 categories: ["R"]
 tags: ["stochastic volatility", "financial time series"]
 ---
