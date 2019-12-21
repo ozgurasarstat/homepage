@@ -11,3 +11,19 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Turkish Airlines Stock Data
+
+```{r}
+library(quantmod)
+library(dygraphs)
+
+percen <- function(x){
+  x2 <-as.numeric(x)
+  out <- (x2[-1] - x2[-length(x2)])/x2[-length(x2)] * 100
+  out <- as.xts(out, order.by = index(x)[-1])
+}
+
+dat <- getSymbols("mavi.IS", auto.assign = FALSE)
+dat %>% Cl() %>% dygraph()
+dat[, 1:4] %>% dygraph() %>% dyCandlestick()
+dat %>% Cl() %>% percen %>% dygraph
+```
