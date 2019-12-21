@@ -17,26 +17,20 @@
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/project/real-time-monitoring/</guid>
-      <description>
-
-&lt;p&gt;This project contains a number of works mainly applied to kidney failure.&lt;/p&gt;
-
+      <description>&lt;p&gt;This project contains a number of works mainly applied to kidney failure.&lt;/p&gt;
 &lt;h1 id=&#34;incipient-renal-failure&#34;&gt;Incipient Renal Failure&lt;/h1&gt;
-
-&lt;p&gt;In &lt;a href=&#34;https://academic.oup.com/biostatistics/article/16/3/522/269574&#34; target=&#34;_blank&#34;&gt;Diggle, Sousa and Asar (2015)&lt;/a&gt; we considered
-modelling 392,870 estimated glomerular filtration
-rate (eGFR) observations from 22,910 patients living in the city of Salford in Greater
-Manchester. The model is a linear mixed-effects model with a Gaussian process term for long series of repeated measurement data. The aim is to identify high risk primary care patient in order for timely referral to secondary care. We base our methods on a clinical guideline
-that says a primary care patient should be referred to secondary care if s/he loses
+&lt;p&gt;In &lt;a href=&#34;https://academic.oup.com/biostatistics/article/16/3/522/269574&#34;&gt;Diggle, Sousa and Asar (2015)&lt;/a&gt; we considered 
+modelling 392,870 estimated glomerular filtration 
+rate (eGFR) observations from 22,910 patients living in the city of Salford in Greater 
+Manchester. The model is a linear mixed-effects model with a Gaussian process term for long series of repeated measurement data. The aim is to identify high risk primary care patient in order for timely referral to secondary care. We base our methods on a clinical guideline 
+that says a primary care patient should be referred to secondary care if s/he loses 
 kidney functon at least at a rate of 5% per year.&lt;/p&gt;
-
 &lt;h1 id=&#34;predicting-kidney-graft-survival&#34;&gt;Predicting Kidney Graft Survival&lt;/h1&gt;
-
-&lt;p&gt;In &lt;a href=&#34;https://arxiv.org/abs/1905.00816&#34; target=&#34;_blank&#34;&gt;Asar, Fournier and Dantan (2019)&lt;/a&gt; we predict kidney graft survival for patients in the French transplant cohort,
-&lt;a href=&#34;http://www.divat.fr/en&#34; target=&#34;_blank&#34;&gt;DIVAT&lt;/a&gt;. The model is a joint model for longitudinal and
-survival data with non-Gaussian random-effects and measurement error term.
-We propose improved predictions of kidney graft survival compared to the
-model with Gaussian terms that was proposed by &lt;a href=&#34;https://academic.oup.com/ndt/advance-article-abstract/doi/10.1093/ndt/gfz027/5374746&#34; target=&#34;_blank&#34;&gt;Fournier et al.(2019)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In &lt;a href=&#34;https://arxiv.org/abs/1905.00816&#34;&gt;Asar, Fournier and Dantan (2019)&lt;/a&gt; we predict kidney graft survival for patients in the French transplant cohort, 
+&lt;a href=&#34;http://www.divat.fr/en&#34;&gt;DIVAT&lt;/a&gt;. The model is a joint model for longitudinal and 
+survival data with non-Gaussian random-effects and measurement error term. 
+We propose improved predictions of kidney graft survival compared to the 
+model with Gaussian terms that was proposed by &lt;a href=&#34;https://academic.oup.com/ndt/advance-article-abstract/doi/10.1093/ndt/gfz027/5374746&#34;&gt;Fournier et al.(2019)&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

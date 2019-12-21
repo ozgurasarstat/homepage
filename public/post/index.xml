@@ -6,10 +6,25 @@
     <description>Recent content in Posts on Özgür Asar, PhD</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Stochastic Volatility Models</title>
+      <link>/post/stochastic-volatility-models/</link>
+      <pubDate>Sat, 21 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/stochastic-volatility-models/</guid>
+      <description>
+
+
+&lt;div id=&#34;aa&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;aa&lt;/h2&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Robust Joint Models</title>
