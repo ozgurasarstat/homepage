@@ -10,7 +10,7 @@ tags: ["stochastic volatility", "financial time series"]
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-# Turkish Airlines Stock Data
+## Turkish Airlines Stock Data
 
 ```{r}
 library(quantmod)
