@@ -18,6 +18,9 @@ image:
 projects: []
 ---
 
+**Important note**: This page is only educational, i.e. do not 
+take it too serious to make investments!
+
 ## MAVI Stock Data 
 
 Below is the dynamic time-series plot of 
@@ -107,8 +110,5 @@ volplot(res, forecast = 20)
 The posterior means of the out-of-sample 
 predictions indicate that volatility tends 
 to decrease. However, the distributions are 
-highly right-skewed, This indicates that 
+highly right-skewed. This indicates that 
 high volatilities are possible. 
-
-Notes: this page is only educational, i.e. do not 
-take it too serious to make investments!
