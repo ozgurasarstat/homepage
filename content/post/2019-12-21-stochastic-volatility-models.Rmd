@@ -18,4 +18,92 @@ image:
 projects: []
 ---
 
-## aa
+## MAVI Stock Data (MSD)
+
+Below is the dynamic time-series plot of 
+the daily closing MSD, between 15 June 2017 
+and 20 December 2019; there ar 656 days in total. 
+Moving the cursor 
+on the plot will tell the date and the 
+value of the stock, and the plot can be zoomed 
+by slicing it and un-zoomed by double left click.
+
+\vspace{5in}
+
+```{r echo = FALSE}
+suppressMessages(library(tidyverse))
+suppressMessages(library(quantmod))
+suppressMessages(library(dygraphs))
+options("getSymbols.warning4.0" = FALSE)
+dat <- getSymbols("MAVI.IS", auto.assign = FALSE, warnings = FALSE)
+
+dat %>% Cl() %>% dygraph()
+```
+
+
+Corresponding one-period percentage changes 
+are displayed in the following dynamic plot. 
+
+
+```{r echo = FALSE}
+percen <- function(x){
+  x2 <-as.numeric(x)
+  out <- (x2[-1] - x2[-length(x2)])/x2[-length(x2)] * 100
+  out <- as.xts(out, order.by = index(x)[-1])
+}
+
+dat %>% Cl() %>% percen() %>% dygraph()
+```
+
+
+Auto-correlation plot of the percentage change data 
+is given below.
+
+
+```{r echo = FALSE}
+suppressMessages(library(forecast))
+
+dat %>% Cl() %>% percen() %>% ggAcf()
+```
+
+
+It is apparent that percentage change data is 
+zero-mean, but not constant variance. 
+Moreover, it serially uncorrelated as 
+almost all the correlation coefficients 
+are within the confidence bands. 
+It is also interesting to see evidence 
+of seasonality, although not significant, 
+in the auto-correlation plot as hinted 
+by the consistently positive and negative 
+s-shaped correlations. 
+
+Based on these, the so-called stochastic 
+volatility model would be appropriate to 
+model one-period percentage return data. 
+For inference we wil take a Bayesian paradigm, 
+and sample from the posterior distributions; 
+details are skipped.
+
+In- and out-of-sample (20 days, i.e. one month) 
+predictions are displayed in the following plot, 
+where while the former predictions are in solid 
+lines, the latter in dashed-lines. Note that 
+the y-axis is hundred times the variance. 
+
+```{r echo = FALSE}
+suppressMessages(library(stochvol))
+
+x <- dat %>% Cl() %>% percen() %>% as.numeric() + 0.0003
+
+res <- svsample(x, priormu = c(-10, 1), priorphi = c(20, 1.1), priorsigma = 0.1)
+
+#summary(res, showlatent = FALSE)
+volplot(res, forecast = 20)
+```
+
+The posterior means of the out-of-sample 
+predictions indicate that volatility tends 
+to decrease. However, the distributions are 
+highly right-skewed, This indicates that 
+high volatilities are possible. 
