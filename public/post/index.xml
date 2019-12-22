@@ -29,11 +29,11 @@
 &lt;script src=&#34;/rmarkdown-libs/dygraphs-binding/dygraphs.js&#34;&gt;&lt;/script&gt;
 
 
-&lt;div id=&#34;mavi-stock-data-msd&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;MAVI Stock Data (MSD)&lt;/h2&gt;
+&lt;div id=&#34;mavi-stock-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;MAVI Stock Data&lt;/h2&gt;
 &lt;p&gt;Below is the dynamic time-series plot of
-the daily closing MSD, between 15 June 2017
-and 20 December 2019; there ar 656 days in total.
+the daily closing MAVI stock data, between 15 June 2017
+and 20 December 2019; there are 656 days in total.
 Moving the cursor
 on the plot will tell the date and the
 value of the stock, and the plot can be zoomed

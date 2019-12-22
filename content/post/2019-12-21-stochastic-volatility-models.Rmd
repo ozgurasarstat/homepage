@@ -18,11 +18,11 @@ image:
 projects: []
 ---
 
-## MAVI Stock Data (MSD)
+## MAVI Stock Data 
 
 Below is the dynamic time-series plot of 
-the daily closing MSD, between 15 June 2017 
-and 20 December 2019; there ar 656 days in total. 
+the daily closing MAVI stock data, between 15 June 2017 
+and 20 December 2019; there are 656 days in total. 
 Moving the cursor 
 on the plot will tell the date and the 
 value of the stock, and the plot can be zoomed 
@@ -39,6 +39,8 @@ dat <- getSymbols("MAVI.IS", auto.assign = FALSE, warnings = FALSE)
 
 dat %>% Cl() %>% dygraph()
 ```
+
+
 
 
 Corresponding one-period percentage changes 
@@ -85,7 +87,7 @@ For inference we wil take a Bayesian paradigm,
 and sample from the posterior distributions; 
 details are skipped.
 
-In- and out-of-sample (20 days, i.e. one month) 
+In- and out-of-sample (20 days; 23 December 2019 - 15 January 2020) 
 predictions are displayed in the following plot, 
 where while the former predictions are in solid 
 lines, the latter in dashed-lines. Note that 
@@ -107,3 +109,6 @@ predictions indicate that volatility tends
 to decrease. However, the distributions are 
 highly right-skewed, This indicates that 
 high volatilities are possible. 
+
+Notes: this page is only educational, i.e. do not 
+take it too serious to make investments!
