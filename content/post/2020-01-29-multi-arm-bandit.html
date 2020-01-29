@@ -19,6 +19,8 @@ projects: []
 
 
 
+<div id="r-codes" class="section level1">
+<h1>R codes</h1>
 <pre class="r"><code> suppressMessages(library(tidyverse))
 
  ## number of arms 
@@ -69,8 +71,63 @@ projects: []
  ## averaged estimated values vs true values
  apply(Qsave, 1, which.max) %&gt;% table() %&gt;% &quot;/&quot;(nrep) %&gt;% round(2)</code></pre>
 <pre><code>## .
-##    1    2    3    4    5    6    7    8    9   10 
-## 0.03 0.03 0.02 0.14 0.04 0.22 0.06 0.43 0.01 0.01</code></pre>
+##    1    2    3    4    5    6    7    9   10 
+## 0.00 0.31 0.14 0.02 0.14 0.05 0.33 0.02 0.00</code></pre>
 <pre class="r"><code> q %&gt;% round(2)</code></pre>
 <pre><code>##     1     2     3     4     5     6     7     8     9    10 
-## -0.43 -0.38 -0.54  0.42 -0.24  0.76 -0.05  1.26 -0.79 -0.81</code></pre>
+## -1.38  1.00  0.45 -0.82  0.39 -0.09  1.05 -2.76 -0.82 -1.86</code></pre>
+</div>
+<div id="python-codes" class="section level1">
+<h1>Python codes</h1>
+<pre class="python"><code>import numpy as np
+import random
+import pandas as pd
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = &quot;all&quot;
+
+k = 10
+eps = 0.1
+M = 1000
+nrep = 2000
+
+q = np.random.normal(loc = 0.0, scale = 1.0, size = k)
+
+Qsave = pd.DataFrame()
+
+for i in range(nrep):
+    
+    bandit = np.random.normal(loc = q, scale = 1.0, size = k).tolist()
+        
+    N = np.zeros(k)
+    Q = np.zeros(k)
+    
+    for ii in range(M):
+        if np.random.uniform(size = 1) &lt; (1 - eps):
+            A = random.sample([k for k, j in enumerate(Q) if j == max(Q)], 1)
+        else:
+            A = random.sample(range(k), 1)
+            
+        R = bandit[A[0]]
+    
+        N[A] = N[A] + 1
+        Q[A] = Q[A] + (R - Q[A])/N[A]
+    
+    Qsave = pd.concat([pd.DataFrame(Qsave), pd.DataFrame(Q)], axis = 1)
+
+pd.crosstab(Qsave.idxmax(axis = 0), columns = &quot;Prop&quot;, normalize = True)</code></pre>
+<pre><code>## col_0    Prop
+## row_0        
+## 0      0.0005
+## 1      0.0065
+## 2      0.0355
+## 3      0.0380
+## 4      0.1655
+## 5      0.0100
+## 6      0.0300
+## 7      0.0855
+## 8      0.0025
+## 9      0.6260</code></pre>
+<pre class="python"><code>q</code></pre>
+<pre><code>## array([-1.17012562, -0.62955718,  0.34365919,  0.36373688,  1.21680322,
+##        -0.18000371,  0.3253811 ,  0.84924658, -1.03595   ,  2.28262604])</code></pre>
+</div>
