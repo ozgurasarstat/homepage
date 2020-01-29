@@ -17,8 +17,8 @@ image:
 projects: []
 ---
 
-```{r echo = FALSE}
- library(tidyverse)
+```{r}
+ suppressMessages(library(tidyverse))
 
  ## number of arms 
  k <- 10
