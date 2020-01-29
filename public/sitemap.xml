@@ -33,12 +33,17 @@
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2019-12-21T22:27:23+03:00</lastmod>
+    <loc>/post/multi-arm-bandit/</loc>
+    <lastmod>2020-01-29T14:48:00+03:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2020-01-29T14:48:00+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
     <lastmod>2019-12-21T22:27:23+03:00</lastmod>
   </url>
   

@@ -17,7 +17,7 @@ image:
 projects: []
 ---
 
-```
+```{r echo = FALSE}
  library(tidyverse)
 
  ## number of arms 

@@ -6,10 +6,35 @@
     <description>Recent content in Posts on Özgür Asar, PhD</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Multi-arm Bandit</title>
+      <link>/post/multi-arm-bandit/</link>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/multi-arm-bandit/</guid>
+      <description>
+
+
+&lt;pre&gt;&lt;code&gt;## -- Attaching packages ----------------------------------------------------------------- tidyverse 1.3.0 --&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;lt;U+2713&amp;gt; ggplot2 3.2.1     &amp;lt;U+2713&amp;gt; purrr   0.3.2
+## &amp;lt;U+2713&amp;gt; tibble  2.1.3     &amp;lt;U+2713&amp;gt; dplyr   0.8.3
+## &amp;lt;U+2713&amp;gt; tidyr   1.0.0     &amp;lt;U+2713&amp;gt; stringr 1.4.0
+## &amp;lt;U+2713&amp;gt; readr   1.3.1     &amp;lt;U+2713&amp;gt; forcats 0.4.0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## -- Conflicts -------------------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## .
+##    1    2    3    4    5    6    7    9   10 
+## 0.05 0.04 0.01 0.28 0.03 0.01 0.18 0.03 0.36&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     1     2     3     4     5     6     7     8     9    10 
+##  0.54  0.43 -0.45  1.56  0.31 -0.17  1.26 -1.26  0.20  1.72&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Stochastic Volatility Models</title>
