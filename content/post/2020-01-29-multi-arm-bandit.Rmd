@@ -1,0 +1,71 @@
+---
+title: Multi-arm Bandit
+author: Ozgur Asar
+date: '2020-01-29'
+slug: multi-arm-bandit
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-01-29T14:48:00+03:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+```
+ library(tidyverse)
+
+ ## number of arms 
+ k <- 10
+ 
+ ## true values of the arms
+ q <- rnorm(k, 0, 1); names(q) <- 1:k
+ 
+ ## rate of exploration
+ eps <- 0.1
+ 
+ ## number of steps
+ M <- 1000
+ 
+ ## number of replications
+ nrep <- 2000
+
+ ## save the estimated values 
+ Qsave <- c()
+ 
+ for(i in 1:nrep){
+   
+   ## simulate the bandits/rewards
+   bandit <- lapply(1:k, function(i) rnorm(1, q[i], 1)) %>% unlist()
+   
+   ## save the number of selection and estimated values for ith replication
+   N <- Q <- rep(0, k)
+   
+   for (ii in 1:M){
+     
+     if(runif(1) < (1 - eps)){
+       A <- sample(which(Q == max(Q)), 1)
+     }else{
+       A <- sample(1:k, 1)
+     }
+     
+     R <- bandit[A]
+     
+     N[A] <- N[A] + 1
+     Q[A] <- Q[A] + (R - Q[A])/N[A]
+     
+   }
+   
+   Qsave <- rbind(Qsave, Q)
+   
+ }
+ 
+ ## averaged estimated values vs true values
+ apply(Qsave, 1, which.max) %>% table() %>% "/"(nrep) %>% round(2)
+ q %>% round(2)
+```
